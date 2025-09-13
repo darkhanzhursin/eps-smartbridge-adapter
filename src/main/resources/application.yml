@@ -1,0 +1,82 @@
+# -----------------------
+# Настройки сервера
+# -----------------------
+server:
+  port: ${SERVER_PORT}                # Порт
+
+# -----------------------
+# Настройки Spring Boot
+# -----------------------
+spring:
+  application:
+    name: eps-smartbridge-adapter                   # Имя приложения
+  springdoc:
+    api-docs:
+      path: /v3/api-docs              # Путь к OpenAPI документации
+    swagger-ui:
+      path: /swagger-ui.html          # Путь к Swagger UI
+      operations-sorter: alpha        # Сортировка операций по алфавиту
+      tags-sorter: alpha              # Сортировка тегов по алфавиту
+      display-request-duration: true  # Показывать длительность запросов
+  messages:
+    basename: messages                # Базовое имя для i18n-файлов
+    encoding: UTF-8                   # Кодировка сообщений
+  dotenv:
+    enabled: true                     # Был включен .env файла с переменными конфигов
+
+# -----------------------
+# Настройки подключения к базе данных
+# -----------------------
+  datasource:
+    url: jdbc:sqlserver://${DB_HOST:192.168.34.120}:${DB_PORT:1433};database=${DB_NAME:registers_base};encrypt=false;sendStringParametersAsUnicode=false   # для локального пользования
+#    url: jdbc:sqlserver://${DB_HOST:192.168.34.120}:${DB_PORT:1433};database=${DB_NAME:registers_base};sendStringParametersAsUnicode=false  # для production
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServer2012Dialect
+    open-in-view: false               # Отключение Open Session in View
+    hibernate:
+      ddl-auto: none                  # Без автоматических изменений схемы БД
+
+# -----------------------
+# Настройки Feign client
+# -----------------------
+#feign:
+#  httpclient:
+#    disable-ssl-validation: true
+#  url:
+#    eh-erdb-rpn-service: ${EH_ERDB_RPN_SERVICE_URL:http://192.168.34.150:5051}
+#    eh-erdb-sur-service: ${EH_ERDB_SUR_SERVICE_URL:http://192.168.34.150:5050}
+#    sur: ${SUR_URL:https://survnservice.ezdrav.kz}
+
+# -----------------------
+# Настройки WSS-подписи (Web Services Security)
+# -----------------------
+sign:
+  wss-key: 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
+  wss-cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZUakNDQkxhZ0F3SUJBZ0lVUzRiOGp6aUVhb1lQK3RWRGVHamxUK0tYNE9rd0RnWUtLb01PQXdvQkFRSUQKQWdVQU1GZ3hTVEJIQmdOVkJBTU1RTkt3MEp2UW90Q2kwS3ZTbWlEUW10Q2owNWpRbTlDUTBKM1FsTkNyMEtEUQpvOUNvMEtzZzBKN1FvTkNpMEpEUW05Q3IwcG9nS0VkUFUxUXBJREl3TWpJeEN6QUpCZ05WQkFZVEFrdGFNQjRYCkRUSTFNREl4TnpFeU1Ua3dORm9YRFRJNE1ESXhOekV5TVRrd05Gb3dnZ0cwTVNVd0l3WUtDWkltaVpQeUxHUUIKQVF3Vk1TNHlMak01T0M0ekxqTXVOQzR4TGpJdU5pNDRNVWN3UlFZRFZRUURERDdRcU5DNzBZN1F0eUFpMEszUQp1OUMxMExyUmd0R0EwTDdRdmRDOTBMN1FzOUMrSU5DLzBZRFFzTkN5MExqUmd0QzEwTHZSak5HQjBZTFFzdEN3CklqRUxNQWtHQTFVRUJoTUNTMW94Z2dFWk1JSUJGUVlEVlFRS0RJSUJETkNnMExYUmdkQy8wWVBRc2RDNzBMalEKdXRDdzBMM1JnZEM2MEw3UXRTRFFzOUMrMFlIUmc5QzAwTERSZ05HQjBZTFFzdEMxMEwzUXZkQyswTFVnMFlQUgpoOUdBMExYUXR0QzAwTFhRdmRDNDBMVWdJdENjMExqUXZkQzQwWUhSZ3RDMTBZRFJnZEdDMExMUXZpRFJodEM0CjBZVFJnTkMrMExMUXZ0Q3owTDRnMFlEUXNOQzMwTExRdU5HQzBMalJqeXdnMExqUXZkQzkwTDdRc3RDdzBZYlEKdU5DNUlOQzRJTkN3MFkzUmdOQyswTHJRdnRHQjBMelF1TkdIMExYUmdkQzYwTDdRdVNEUXY5R0EwTDdRdk5HTAowWWpRdTlDMTBMM1F2ZEMrMFlIUmd0QzRJTkNnMExYUmdkQy8wWVBRc2RDNzBMalF1dEM0SU5DYTBMRFF0OUN3CjBZWFJnZEdDMExEUXZTSXhHREFXQmdOVkJBc01EMEpKVGpFMk1URTBNREF4TmpjME56Q0JyREFqQmdrcWd3NEQKQ2dFQkFnSXdGZ1lLS29NT0F3b0JBUUlDQVFZSUtvTU9Bd29CQXdNRGdZUUFCSUdBL0RuSjZUSUdxbGVhaXcxSQpKZm9iSGRHdmdnZFZES1VIV0FjRC81c2VMRUtsU2hNTGdOczBBNFdsWThpaG8zYWg0ekdHekdTeWxsWXJHTUZKCmpyM0gxWUlGS1ZIdUpkRVZvdWxiN2VrZExSY1I2K0lsWmpUK1pjWkJNcmI4N2J4eERYck54SHZCUEVWYWVGVWgKWVFEcExZamcyOWNPVXNjRUJsU0dITmt6ZzBLamdnR21NSUlCb2pBT0JnTlZIUThCQWY4RUJBTUNBOGd3SGdZRApWUjBsQkJjd0ZRWUlLb01PQXdNRUFRSUdDU3FERGdNREJBRUNCakE0QmdOVkhTQUVNVEF2TUMwR0JpcUREZ01ECkFqQWpNQ0VHQ0NzR0FRVUZCd0lCRmhWb2RIUndPaTh2Y0d0cExtZHZkaTVyZWk5amNITXdPQVlEVlIwZkJERXcKTHpBdG9DdWdLWVluYUhSMGNEb3ZMMk55YkM1d2Eya3VaMjkyTG10NkwyNWpZVjluYjNOMFh6SXdNakl1WTNKcwpNRG9HQTFVZExnUXpNREV3TDZBdG9DdUdLV2gwZEhBNkx5OWpjbXd1Y0d0cExtZHZkaTVyZWk5dVkyRmZaRjluCmIzTjBYekl3TWpJdVkzSnNNR2dHQ0NzR0FRVUZCd0VCQkZ3d1dqQWlCZ2dyQmdFRkJRY3dBWVlXYUhSMGNEb3YKTDI5amMzQXVjR3RwTG1kdmRpNXJlakEwQmdnckJnRUZCUWN3QW9Zb2FIUjBjRG92TDNCcmFTNW5iM1l1YTNvdgpZMlZ5ZEM5dVkyRmZaMjl6ZEY4eU1ESXlMbU5sY2pBZEJnTlZIUTRFRmdRVXk0YjhqemlFYW9ZUCt0VkRlR2psClQrS1g0T2t3SHdZRFZSMGpCQmd3Rm9BVS9qQytuOGlRWXo4Zi8xbzhETERJWDB4dEZ3Z3dGZ1lHS29NT0F3TUYKQkF3d0NnWUlLb01PQXdNRkFRRXdEZ1lLS29NT0F3b0JBUUlEQWdVQUE0R0JBTWY2cHhsSU1DeDBtMWs4MElFTwpXeW8zZWxvZ2p1eEtzbG11VXRja0xMa3FUNUJHZnpzck81aUxyZk1zcEY1aGFQL3pxMW1nSHlSRkVqSFNRRVFHClNLZnEvQTZnWDVRdDIzYVRkQkdMTjNFbTdscmJJUGs0YURPdUMxRHRpaUhpTnViNy9zSlZ6N3dUQ0NpWUxtNmgKQStmL3pzT0dnaENwS0dIb0FxQm5wVG9jCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  wss-password: Antananarivu@388$
+
+# -----------------------
+# Настройки Apache CXF (SOAP)
+# -----------------------
+cxf:
+  path: /api/erdb/soap
+
+# -----------------------
+# Сканирование Dto
+# -----------------------
+#onco:
+#  handlers:
+#    scan-packages:
+#      - kz.ezdrav.eh.erdb_onko.model.soap
+#    naming-fallback: true
+# -----------------------
+# Конфигурация диагнозов для онкологии
+# -----------------------
+#diagnosis-codes:
+#  paired-organs: [C34, C50, C56, C64, C65, C66, C69]  # Диагноз относится к парным органам
+#  mkb-ten-permitted: [C01, C12, C19, C20, C23, C33, C37, C52, C55, C56, C58, C61, C64, C65, C66, C67, C73, C97] # Трёхзначные коды МКБ-10 разрешены только для указанных диагнозов
+#  not-allowed-for-men: [C51, C52, C53, C54, C55, C56, C57, C58] # Эти диагнозы относятся только к женским органам
+#  not-allowed-for-women: [C60, C61, C62, C63] # Эти диагнозы относятся только к мужским органам
