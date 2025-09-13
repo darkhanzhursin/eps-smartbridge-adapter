@@ -1,0 +1,56 @@
+package kz.ezdrav.eps_smartbridge_adapter.webservice.endpoint.impl;
+
+import javax.jws.WebService;
+import kz.ezdrav.eh.shep.syncchannel.v10.interfaces.SendMessageSendMessageFaultMsg;
+import kz.ezdrav.eh.shep.syncchannel.v10.types.request.SyncSendMessageRequest;
+import kz.ezdrav.eh.shep.syncchannel.v10.types.response.SyncSendMessageResponse;
+import kz.ezdrav.eh.shep.util.ShepUtil;
+import kz.ezdrav.eps_smartbridge_adapter.annotation.SaveShepServiceEvent;
+import kz.ezdrav.eps_smartbridge_adapter.exception.GeneralException;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.common.GeneralInfoResponse;
+import kz.ezdrav.eps_smartbridge_adapter.webservice.endpoint.EpsEndpoint;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+@WebService(serviceName = "EsmoService",
+    targetNamespace = "http://bip.bee.kz/SyncChannel/v10/Interfaces",
+    endpointInterface = "kz.ezdrav.eps_smartbridge_adapter.webservice.endpoint.EpsEndpoint")
+@Component
+@RequiredArgsConstructor
+@Slf4j
+public class EpsEndpointImpl implements EpsEndpoint {
+
+    @Override
+    @SaveShepServiceEvent
+    public SyncSendMessageResponse sendMessage(SyncSendMessageRequest request) throws SendMessageSendMessageFaultMsg {
+        return handleRequest(request);
+    }
+
+    private SyncSendMessageResponse handleRequest(SyncSendMessageRequest request) {
+        Object data = request.getRequestData().getData();
+
+        try {
+//            if (data instanceof CreateEsmo) {
+//                return handleCreateEsmo(data);
+//            }
+        }
+        catch (GeneralException e) {
+            return ShepUtil.buildErrorSyncSendMessageResponse(GeneralInfoResponse.buildError(e));
+        }
+        catch (Exception e) {
+            log.error("Error occurred while processing request: ", e);
+            return ShepUtil.buildErrorSyncSendMessageResponse(GeneralInfoResponse.buildError(e));
+        }
+
+        return ShepUtil.buildErrorSyncSendMessageResponse(
+            GeneralInfoResponse.buildError("Данный тип запроса не поддерживается")
+        );
+    }
+
+    private SyncSendMessageResponse handleCreateEsmo(Object data) {
+//        CreateEsmo createEsmo = (CreateEsmo) data;
+//        return ShepUtil.buildSuccessSyncSendMessageResponse(esmoService.create(createEsmo));
+        return null;
+    }
+}
