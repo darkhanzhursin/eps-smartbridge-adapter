@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import kz.ezdrav.eh.erdb.enums.ResponseStatus;
+import kz.ezdrav.eps_smartbridge_adapter.enums.ResponseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

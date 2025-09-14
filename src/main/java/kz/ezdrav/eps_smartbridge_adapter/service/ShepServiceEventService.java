@@ -1,4 +1,4 @@
-package kz.ezdrav.eh.erdb.service;
+package kz.ezdrav.eps_smartbridge_adapter.service;
 
 import kz.ezdrav.eh.erdb_common.model.domain.ShepServiceEvent;
 import kz.ezdrav.eh.erdb_common.repository.ShepServiceEventRepository;

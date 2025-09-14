@@ -1,9 +1,9 @@
-package kz.ezdrav.eh.erdb.util;
+package kz.ezdrav.eps_smartbridge_adapter.util;
 
+import java.io.StringWriter;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
-import java.io.StringWriter;
 
 public class XmlUtil {
     public static <T> String serializeNoRoot(T obj, Class<T> clazz,

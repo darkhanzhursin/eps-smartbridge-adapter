@@ -6,6 +6,10 @@ import kz.ezdrav.eh.erdb_common.model.domain.ShepServiceEvent;
 import kz.ezdrav.eh.shep.enums.ShepStatusCode;
 import kz.ezdrav.eh.shep.syncchannel.v10.types.request.SyncSendMessageRequest;
 import kz.ezdrav.eh.shep.syncchannel.v10.types.response.SyncSendMessageResponse;
+import kz.ezdrav.eps_smartbridge_adapter.exception.EpsServiceException;
+import kz.ezdrav.eps_smartbridge_adapter.model.dto.internal.ShepServiceEventParams;
+import kz.ezdrav.eps_smartbridge_adapter.service.ShepServiceEventService;
+import kz.ezdrav.eps_smartbridge_adapter.util.XmlUtil;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -25,7 +29,7 @@ public class SaveShepServiceEventAspect {
     private static final String DEFAULT_SUCCESS_RESPONSE = "SUCCESS";
     private static final String DEFAULT_ERROR_PREFIX     = "ERROR: ";
 
-    @Around("@annotation(kz.ezdrav.eh.erdb_onko.annotation.SaveShepServiceEvent)")
+    @Around("@annotation(kz.ezdrav.eps_smartbridge_adapter.annotation.SaveShepServiceEvent)")
     public Object process(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result = null;
         SyncSendMessageRequest request = extractRequest(joinPoint);
@@ -92,7 +96,7 @@ public class SaveShepServiceEventAspect {
     private SyncSendMessageRequest extractRequest(JoinPoint joinPoint) {
         Object arg0 = joinPoint.getArgs()[0];
         if (!(arg0 instanceof SyncSendMessageRequest)) {
-            throw new IllegalOnkoArgumentException("Ожидается первый аргумент типа SyncSendMessageRequest");
+            throw new EpsServiceException("Ожидается первый аргумент типа SyncSendMessageRequest");
         }
         return (SyncSendMessageRequest) arg0;
     }

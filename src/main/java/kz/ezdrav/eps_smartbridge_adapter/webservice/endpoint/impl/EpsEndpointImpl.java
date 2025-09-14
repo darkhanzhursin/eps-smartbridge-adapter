@@ -1,6 +1,7 @@
 package kz.ezdrav.eps_smartbridge_adapter.webservice.endpoint.impl;
 
 import javax.jws.WebService;
+import javax.servlet.http.HttpServletRequest;
 import kz.ezdrav.eh.shep.syncchannel.v10.interfaces.SendMessageSendMessageFaultMsg;
 import kz.ezdrav.eh.shep.syncchannel.v10.types.request.SyncSendMessageRequest;
 import kz.ezdrav.eh.shep.syncchannel.v10.types.response.SyncSendMessageResponse;
@@ -8,6 +9,7 @@ import kz.ezdrav.eh.shep.util.ShepUtil;
 import kz.ezdrav.eps_smartbridge_adapter.annotation.SaveShepServiceEvent;
 import kz.ezdrav.eps_smartbridge_adapter.exception.GeneralException;
 import kz.ezdrav.eps_smartbridge_adapter.model.ws.common.GeneralInfoResponse;
+import kz.ezdrav.eps_smartbridge_adapter.service.SmartBridgeLoggingService;
 import kz.ezdrav.eps_smartbridge_adapter.webservice.endpoint.EpsEndpoint;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +23,18 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class EpsEndpointImpl implements EpsEndpoint {
 
+    private final SmartBridgeLoggingService loggingService;
+    private final HttpServletRequest httpServletRequest;
+
     @Override
     @SaveShepServiceEvent
     public SyncSendMessageResponse sendMessage(SyncSendMessageRequest request) throws SendMessageSendMessageFaultMsg {
+        log.info("Received SOAP request: {}", request);
         return handleRequest(request);
     }
 
     private SyncSendMessageResponse handleRequest(SyncSendMessageRequest request) {
+        log.debug("Handling request");
         Object data = request.getRequestData().getData();
 
         try {

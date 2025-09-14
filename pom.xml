@@ -33,6 +33,7 @@
         <jaxb2-maven-plugin.version>2.5.0</jaxb2-maven-plugin.version>
         <build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
         <spring-dotenv.version>3.0.0</spring-dotenv.version>
+        <eh-erdb-common.version>0.0.4-SNAPSHOT</eh-erdb-common.version>
     </properties>
 
     <dependencies>
@@ -80,6 +81,11 @@
         </dependency>
 
         <!-- External Dependencies -->
+        <dependency>
+            <groupId>kz.ezdrav.eh</groupId>
+            <artifactId>eh-erdb-common</artifactId>
+            <version>${eh-erdb-common.version}</version>
+        </dependency>
         <dependency>
             <groupId>kz.ezdrav.eh</groupId>
             <artifactId>eh-common-shep</artifactId>

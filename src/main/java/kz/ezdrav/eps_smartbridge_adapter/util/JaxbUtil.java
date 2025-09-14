@@ -1,9 +1,8 @@
-package kz.ezdrav.eh.erdb.util;
-
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+package kz.ezdrav.eps_smartbridge_adapter.util;
 
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 public class JaxbUtil {
     public static Marshaller buildMarshaller() throws PropertyException {
