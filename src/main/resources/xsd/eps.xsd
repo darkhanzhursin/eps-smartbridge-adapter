@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.kaysat-ps.org"
+           xmlns="http://www.kaysat-ps.org"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+    <!-- ========== Simple Types ========== -->
+    <xs:simpleType name="MKB10Code">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="6"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ServiceID">
+        <xs:restriction base="xs:unsignedLong"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="Currency">
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="20"/>
+            <xs:fractionDigits value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ========== Common Types ========== -->
+    <xs:complexType name="ChekList">
+        <xs:sequence>
+            <xs:element name="scrining_id" type="xs:string"/>
+            <xs:element name="chek_id" type="xs:string"/>
+            <xs:element name="chek_value" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IDRecord">
+        <xs:sequence>
+            <xs:element name="mis_id" type="xs:unsignedLong"/>
+            <xs:element name="id" type="xs:unsignedLong"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ========== Finance ========== -->
+    <xs:complexType name="FinanceElement">
+        <xs:sequence>
+            <xs:element name="ID" type="xs:string"/>
+            <xs:element name="person_id" type="xs:unsignedLong"/>
+            <xs:element name="direction_date" type="xs:dateTime"/>
+            <xs:element name="service_code" type="xs:string"/>
+            <xs:element name="icd_type" type="xs:int"/>
+            <xs:element name="ocd_code" type="MKB10Code"/>
+            <xs:element name="direction_reason" type="xs:int"/>
+            <xs:element name="sended_mo" type="xs:unsignedLong"/>
+            <xs:element name="sending_mo" type="xs:unsignedLong"/>
+            <xs:element name="PatientStatus" type="xs:int" minOccurs="0"/>
+            <xs:element name="RpnIDMother" type="xs:unsignedLong" minOccurs="0"/>
+            <xs:element name="group_id" type="xs:int" minOccurs="0"/>
+            <xs:element name="Place" type="xs:string" minOccurs="0"/>
+            <xs:element name="Parent_id" type="ServiceID" minOccurs="0"/>
+            <xs:element name="ServiceKind2" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="Refferal_id" type="xs:string" minOccurs="0"/>
+            <xs:element name="Visit_type" type="xs:int" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="FinanceBatch">
+        <xs:sequence>
+            <xs:element name="Services" type="FinanceElement" minOccurs="0" maxOccurs="20000"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ========== Requests ========== -->
+    <xs:complexType name="ParamsDate">
+        <xs:sequence>
+            <xs:element name="DateBegin" type="xs:dateTime"/>
+            <xs:element name="DateEnd" type="xs:dateTime"/>
+            <xs:element name="TypeRegistr" type="xs:int"/>
+            <xs:element name="PageNo" type="xs:int"/>
+            <xs:element name="PageSize" type="xs:int"/>
+            <xs:element name="AfterUpd" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="AfterUpdEnd" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="Region" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ParamsIDs">
+        <xs:sequence>
+            <xs:element name="Identifiers" type="IDRecord" maxOccurs="unbounded"/>
+            <xs:element name="TypeRegistr" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ========== Defects ========== -->
+    <xs:complexType name="DefectElement">
+        <xs:sequence>
+            <xs:element name="mis_id" type="xs:unsignedLong" minOccurs="0"/>
+            <xs:element name="id" type="ServiceID"/>
+            <xs:element name="defect_id" type="xs:string"/>
+            <xs:element name="date_defect" type="xs:dateTime"/>
+            <xs:element name="act" type="xs:string"/>
+            <xs:element name="monitoring" type="xs:int"/>
+            <xs:element name="count" type="xs:int"/>
+            <xs:element name="expert_id" type="xs:unsignedLong"/>
+            <xs:element name="vid_defect" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DefectsBatch">
+        <xs:sequence>
+            <xs:element name="Defects" type="DefectElement" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Message" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ========== Services (SetData) ========== -->
+    <xs:complexType name="ServiceElement">
+        <xs:sequence>
+            <xs:element name="ID" type="ServiceID"/>
+            <xs:element name="Date" type="xs:dateTime"/>
+            <xs:element name="Customer" type="xs:unsignedLong" minOccurs="0"/>
+            <xs:element name="Performer" type="xs:unsignedLong"/>
+            <xs:element name="ServiceID" type="xs:long"/>
+            <xs:element name="PatientID" type="xs:unsignedLong" minOccurs="0"/>
+            <xs:element name="PatientFirstName" type="xs:string" minOccurs="0"/>
+            <xs:element name="PatientLastName" type="xs:string" minOccurs="0"/>
+            <xs:element name="PatientBirthDate" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="FinanceSourceID" type="xs:long"/>
+            <xs:element name="MKB10" type="MKB10Code"/>
+            <xs:element name="DoctorFirstName" type="xs:string" minOccurs="0"/>
+            <xs:element name="DoctorLastName" type="xs:string" minOccurs="0"/>
+            <xs:element name="Diag_list" type="ChekList" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ServicesBatch">
+        <xs:sequence>
+            <xs:element name="Services" type="ServiceElement" minOccurs="0" maxOccurs="100"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ========== Elements for operations ========== -->
+    <xs:element name="FinanceSource">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="sData" type="FinanceBatch"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetCtrl">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Params" type="ParamsDate"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetData2">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Size" type="xs:int"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetDataByIDs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Params" type="ParamsIDs"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetDataByPeriod">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Params" type="ParamsDate"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetIdByDate">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Params" type="ParamsDate"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetIDs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Params" type="ParamsDate"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetReferral">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="directed_mo_id" type="xs:unsignedLong"/>
+                <xs:element name="date" type="xs:dateTime"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetRefferalByID">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ID" type="xs:unsignedLong"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetRefferalByPeriod">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Params" type="ParamsDate"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetRefferalByPerson">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IIN" type="xs:string"/>
+                <xs:element name="Token" type="xs:string"/>
+                <xs:element name="RpnID" type="xs:unsignedLong" minOccurs="0"/>
+                <xs:element name="ConsentToken" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetServicesByDate">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Params" type="ParamsDate"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SetData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="sData" type="ServicesBatch"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SetDataAmb">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="sData" type="ServicesBatch"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SetDefects">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="sData" type="DefectsBatch"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SetReferral">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="sData" type="ServicesBatch"/>
+                <xs:element name="Message" type="xs:string" minOccurs="0"/>
+                <xs:element name="Token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
