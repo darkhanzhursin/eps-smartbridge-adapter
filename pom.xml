@@ -122,21 +122,6 @@
             <version>${springdoc-openapi.version}</version>
         </dependency>
 
-        <!-- MS SQL -->
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- Lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <optional>true</optional>
-        </dependency>
-
         <!-- Digital signature -->
         <dependency>
             <groupId>com.sun.xml.messaging.saaj</groupId>
@@ -261,13 +246,12 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>src/main/resources/xsd/onco-form034.xsd</source>
-                                <source>src/main/resources/xsd/common.xsd</source>
+                                <source>src/main/resources/xsd/eps.xsd</source>
                             </sources>
                             <xjbSources>
                                 <xjbSource>src/main/resources/xjb/bindings.xjb</xjbSource>
                             </xjbSources>
-                            <packageName>kz.ezdrav.eh.erdb_onko.model.form034.soap.generated</packageName>
+                            <packageName>kz.ezdrav.eps_smartbridge_adapter.model.ws.eps</packageName>
                             <clearOutputDir>true</clearOutputDir>
                             <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory>
                         </configuration>
