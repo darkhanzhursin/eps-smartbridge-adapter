@@ -6,7 +6,7 @@
 //
 
 
-package kz.ezdrav.eps_smartbridge_adapter.model.ws.esp;
+package kz.ezdrav.eps_smartbridge_adapter.model.ws.eps;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -40,8 +40,8 @@ import javax.xml.bind.annotation.XmlType;
     "params",
     "token"
 })
-@XmlRootElement(name = "GetCtrl")
-public class GetCtrl {
+@XmlRootElement(name = "GetIdByDate")
+public class GetIdByDate {
 
     @XmlElement(name = "Params", required = true)
     protected ParamsDate params;

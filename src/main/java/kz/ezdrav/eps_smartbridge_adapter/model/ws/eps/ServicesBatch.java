@@ -6,7 +6,7 @@
 //
 
 
-package kz.ezdrav.eps_smartbridge_adapter.model.ws.esp;
+package kz.ezdrav.eps_smartbridge_adapter.model.ws.eps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +17,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for DefectsBatch complex type.
+ * <p>Java class for ServicesBatch complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="DefectsBatch"&gt;
+ * &lt;complexType name="ServicesBatch"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="Defects" type="{http://www.kaysat-ps.org}DefectElement" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="Message" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="Services" type="{http://www.kaysat-ps.org}ServiceElement" maxOccurs="100" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -37,68 +36,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DefectsBatch", propOrder = {
-    "defects",
-    "message"
+@XmlType(name = "ServicesBatch", propOrder = {
+    "services"
 })
-public class DefectsBatch {
+public class ServicesBatch {
 
-    @XmlElement(name = "Defects")
-    protected List<DefectElement> defects;
-    @XmlElement(name = "Message")
-    protected String message;
+    @XmlElement(name = "Services")
+    protected List<ServiceElement> services;
 
     /**
-     * Gets the value of the defects property.
+     * Gets the value of the services property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the defects property.
+     * This is why there is not a <CODE>set</CODE> method for the services property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDefects().add(newItem);
+     *    getServices().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link DefectElement }
+     * {@link ServiceElement }
      * 
      * 
      */
-    public List<DefectElement> getDefects() {
-        if (defects == null) {
-            defects = new ArrayList<DefectElement>();
+    public List<ServiceElement> getServices() {
+        if (services == null) {
+            services = new ArrayList<ServiceElement>();
         }
-        return this.defects;
-    }
-
-    /**
-     * Gets the value of the message property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * Sets the value of the message property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMessage(String value) {
-        this.message = value;
+        return this.services;
     }
 
 }

@@ -6,7 +6,7 @@
 //
 
 
-package kz.ezdrav.eps_smartbridge_adapter.model.ws.esp;
+package kz.ezdrav.eps_smartbridge_adapter.model.ws.eps;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="Params" type="{http://www.kaysat-ps.org}ParamsIDs"/&gt;
+ *         &lt;element name="Params" type="{http://www.kaysat-ps.org}ParamsDate"/&gt;
  *         &lt;element name="Token" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -40,11 +40,11 @@ import javax.xml.bind.annotation.XmlType;
     "params",
     "token"
 })
-@XmlRootElement(name = "GetDataByIDs")
-public class GetDataByIDs {
+@XmlRootElement(name = "GetRefferalByPeriod")
+public class GetRefferalByPeriod {
 
     @XmlElement(name = "Params", required = true)
-    protected ParamsIDs params;
+    protected ParamsDate params;
     @XmlElement(name = "Token", required = true)
     protected String token;
 
@@ -53,10 +53,10 @@ public class GetDataByIDs {
      * 
      * @return
      *     possible object is
-     *     {@link ParamsIDs }
+     *     {@link ParamsDate }
      *     
      */
-    public ParamsIDs getParams() {
+    public ParamsDate getParams() {
         return params;
     }
 
@@ -65,10 +65,10 @@ public class GetDataByIDs {
      * 
      * @param value
      *     allowed object is
-     *     {@link ParamsIDs }
+     *     {@link ParamsDate }
      *     
      */
-    public void setParams(ParamsIDs value) {
+    public void setParams(ParamsDate value) {
         this.params = value;
     }
 

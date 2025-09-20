@@ -3,6 +3,8 @@
 # -----------------------
 server:
   port: ${SERVER_PORT}                # Порт
+  servlet:
+    context-path: /adapter
 
 # -----------------------
 # Настройки Spring Boot
@@ -28,10 +30,10 @@ spring:
 # Настройки подключения к базе данных
 # -----------------------
   datasource:
-    url: jdbc:sqlserver://${DB_HOST:192.168.34.120}:${DB_PORT:1433};database=${DB_NAME:registers_base};encrypt=false;sendStringParametersAsUnicode=false   # для локального пользования
+    url: jdbc:sqlserver://${DB_HOST:localhost}:${DB_PORT:1433};database=${DB_NAME:eps};encrypt=false;sendStringParametersAsUnicode=false   # для локального пользования
 #    url: jdbc:sqlserver://${DB_HOST:192.168.34.120}:${DB_PORT:1433};database=${DB_NAME:registers_base};sendStringParametersAsUnicode=false  # для production
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:CherchillKazakh1995@}
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
     database-platform: org.hibernate.dialect.SQLServer2012Dialect
@@ -62,7 +64,10 @@ sign:
 # Настройки Apache CXF (SOAP)
 # -----------------------
 cxf:
-  path: /api/erdb/soap
+  path: /api/eps/soap
+  features:
+    - name: org.apache.cxf.feature.LoggingFeature
+      enabled: false
 
 # -----------------------
 # Сканирование Dto

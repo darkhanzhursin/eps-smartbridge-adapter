@@ -7,7 +7,8 @@ import kz.ezdrav.eh.shep.syncchannel.v10.interfaces.ISyncChannel;
 
 @WebService(targetNamespace = "http://bip.bee.kz/SyncChannel/v10/Interfaces")
 @XmlSeeAlso({
-    kz.ezdrav.eps_smartbridge_adapter.model.ws.common.ObjectFactory.class
+    kz.ezdrav.eps_smartbridge_adapter.model.ws.common.ObjectFactory.class,
+    kz.ezdrav.eps_smartbridge_adapter.model.ws.eps.ObjectFactory.class
 })
 public interface EpsEndpoint extends ISyncChannel {
 }

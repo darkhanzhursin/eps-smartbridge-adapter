@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-@WebService(serviceName = "EsmoService",
+@WebService(serviceName = "EpsService",
     targetNamespace = "http://bip.bee.kz/SyncChannel/v10/Interfaces",
     endpointInterface = "kz.ezdrav.eps_smartbridge_adapter.webservice.endpoint.EpsEndpoint")
 @Component

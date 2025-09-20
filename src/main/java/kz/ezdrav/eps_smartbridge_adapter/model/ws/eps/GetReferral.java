@@ -6,13 +6,16 @@
 //
 
 
-package kz.ezdrav.eps_smartbridge_adapter.model.ws.esp;
+package kz.ezdrav.eps_smartbridge_adapter.model.ws.eps;
 
+import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -25,7 +28,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="sData" type="{http://www.kaysat-ps.org}ServicesBatch"/&gt;
+ *         &lt;element name="directed_mo_id" type="{http://www.w3.org/2001/XMLSchema}unsignedLong"/&gt;
+ *         &lt;element name="date" type="{http://www.w3.org/2001/XMLSchema}dateTime"/&gt;
  *         &lt;element name="Token" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -37,39 +41,68 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "sData",
+    "directedMoId",
+    "date",
     "token"
 })
-@XmlRootElement(name = "SetData")
-public class SetData {
+@XmlRootElement(name = "GetReferral")
+public class GetReferral {
 
+    @XmlElement(name = "directed_mo_id", required = true)
+    @XmlSchemaType(name = "unsignedLong")
+    protected BigInteger directedMoId;
     @XmlElement(required = true)
-    protected ServicesBatch sData;
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar date;
     @XmlElement(name = "Token", required = true)
     protected String token;
 
     /**
-     * Gets the value of the sData property.
+     * Gets the value of the directedMoId property.
      * 
      * @return
      *     possible object is
-     *     {@link ServicesBatch }
+     *     {@link BigInteger }
      *     
      */
-    public ServicesBatch getSData() {
-        return sData;
+    public BigInteger getDirectedMoId() {
+        return directedMoId;
     }
 
     /**
-     * Sets the value of the sData property.
+     * Sets the value of the directedMoId property.
      * 
      * @param value
      *     allowed object is
-     *     {@link ServicesBatch }
+     *     {@link BigInteger }
      *     
      */
-    public void setSData(ServicesBatch value) {
-        this.sData = value;
+    public void setDirectedMoId(BigInteger value) {
+        this.directedMoId = value;
+    }
+
+    /**
+     * Gets the value of the date property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getDate() {
+        return date;
+    }
+
+    /**
+     * Sets the value of the date property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setDate(XMLGregorianCalendar value) {
+        this.date = value;
     }
 
     /**

@@ -6,7 +6,7 @@
 //
 
 
-package kz.ezdrav.eps_smartbridge_adapter.model.ws.esp;
+package kz.ezdrav.eps_smartbridge_adapter.model.ws.eps;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -40,8 +40,8 @@ import javax.xml.bind.annotation.XmlType;
     "sData",
     "token"
 })
-@XmlRootElement(name = "SetDataAmb")
-public class SetDataAmb {
+@XmlRootElement(name = "SetData")
+public class SetData {
 
     @XmlElement(required = true)
     protected ServicesBatch sData;

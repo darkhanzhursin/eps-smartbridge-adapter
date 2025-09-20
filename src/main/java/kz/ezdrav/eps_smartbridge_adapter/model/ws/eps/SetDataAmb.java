@@ -6,7 +6,7 @@
 //
 
 
-package kz.ezdrav.eps_smartbridge_adapter.model.ws.esp;
+package kz.ezdrav.eps_smartbridge_adapter.model.ws.eps;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -26,7 +26,6 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="sData" type="{http://www.kaysat-ps.org}ServicesBatch"/&gt;
- *         &lt;element name="Message" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="Token" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -39,16 +38,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "sData",
-    "message",
     "token"
 })
-@XmlRootElement(name = "SetReferral")
-public class SetReferral {
+@XmlRootElement(name = "SetDataAmb")
+public class SetDataAmb {
 
     @XmlElement(required = true)
     protected ServicesBatch sData;
-    @XmlElement(name = "Message")
-    protected String message;
     @XmlElement(name = "Token", required = true)
     protected String token;
 
@@ -74,30 +70,6 @@ public class SetReferral {
      */
     public void setSData(ServicesBatch value) {
         this.sData = value;
-    }
-
-    /**
-     * Gets the value of the message property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * Sets the value of the message property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMessage(String value) {
-        this.message = value;
     }
 
     /**

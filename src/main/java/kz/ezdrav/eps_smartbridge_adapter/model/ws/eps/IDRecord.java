@@ -6,27 +6,28 @@
 //
 
 
-package kz.ezdrav.eps_smartbridge_adapter.model.ws.esp;
+package kz.ezdrav.eps_smartbridge_adapter.model.ws.eps;
 
+import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for IDRecord complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType&gt;
+ * &lt;complexType name="IDRecord"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="sData" type="{http://www.kaysat-ps.org}FinanceBatch"/&gt;
- *         &lt;element name="Token" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="mis_id" type="{http://www.w3.org/2001/XMLSchema}unsignedLong"/&gt;
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}unsignedLong"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -36,64 +37,65 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "sData",
-    "token"
+@XmlType(name = "IDRecord", propOrder = {
+    "misId",
+    "id"
 })
-@XmlRootElement(name = "FinanceSource")
-public class FinanceSource {
+public class IDRecord {
 
+    @XmlElement(name = "mis_id", required = true)
+    @XmlSchemaType(name = "unsignedLong")
+    protected BigInteger misId;
     @XmlElement(required = true)
-    protected FinanceBatch sData;
-    @XmlElement(name = "Token", required = true)
-    protected String token;
+    @XmlSchemaType(name = "unsignedLong")
+    protected BigInteger id;
 
     /**
-     * Gets the value of the sData property.
+     * Gets the value of the misId property.
      * 
      * @return
      *     possible object is
-     *     {@link FinanceBatch }
+     *     {@link BigInteger }
      *     
      */
-    public FinanceBatch getSData() {
-        return sData;
+    public BigInteger getMisId() {
+        return misId;
     }
 
     /**
-     * Sets the value of the sData property.
+     * Sets the value of the misId property.
      * 
      * @param value
      *     allowed object is
-     *     {@link FinanceBatch }
+     *     {@link BigInteger }
      *     
      */
-    public void setSData(FinanceBatch value) {
-        this.sData = value;
+    public void setMisId(BigInteger value) {
+        this.misId = value;
     }
 
     /**
-     * Gets the value of the token property.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link BigInteger }
      *     
      */
-    public String getToken() {
-        return token;
+    public BigInteger getId() {
+        return id;
     }
 
     /**
-     * Sets the value of the token property.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link BigInteger }
      *     
      */
-    public void setToken(String value) {
-        this.token = value;
+    public void setId(BigInteger value) {
+        this.id = value;
     }
 
 }

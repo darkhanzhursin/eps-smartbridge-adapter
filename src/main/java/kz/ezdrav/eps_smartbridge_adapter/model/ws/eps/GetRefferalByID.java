@@ -6,12 +6,14 @@
 //
 
 
-package kz.ezdrav.eps_smartbridge_adapter.model.ws.esp;
+package kz.ezdrav.eps_smartbridge_adapter.model.ws.eps;
 
+import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -25,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="Params" type="{http://www.kaysat-ps.org}ParamsDate"/&gt;
+ *         &lt;element name="ID" type="{http://www.w3.org/2001/XMLSchema}unsignedLong"/&gt;
  *         &lt;element name="Token" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -37,39 +39,40 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "params",
+    "id",
     "token"
 })
-@XmlRootElement(name = "GetIDs")
-public class GetIDs {
+@XmlRootElement(name = "GetRefferalByID")
+public class GetRefferalByID {
 
-    @XmlElement(name = "Params", required = true)
-    protected ParamsDate params;
+    @XmlElement(name = "ID", required = true)
+    @XmlSchemaType(name = "unsignedLong")
+    protected BigInteger id;
     @XmlElement(name = "Token", required = true)
     protected String token;
 
     /**
-     * Gets the value of the params property.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
-     *     {@link ParamsDate }
+     *     {@link BigInteger }
      *     
      */
-    public ParamsDate getParams() {
-        return params;
+    public BigInteger getID() {
+        return id;
     }
 
     /**
-     * Sets the value of the params property.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
-     *     {@link ParamsDate }
+     *     {@link BigInteger }
      *     
      */
-    public void setParams(ParamsDate value) {
-        this.params = value;
+    public void setID(BigInteger value) {
+        this.id = value;
     }
 
     /**

@@ -6,7 +6,7 @@
 //
 
 
-package kz.ezdrav.eps_smartbridge_adapter.model.ws.esp;
+package kz.ezdrav.eps_smartbridge_adapter.model.ws.eps;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="Params" type="{http://www.kaysat-ps.org}ParamsDate"/&gt;
+ *         &lt;element name="Size" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="Token" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -37,39 +37,31 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "params",
+    "size",
     "token"
 })
-@XmlRootElement(name = "GetDataByPeriod")
-public class GetDataByPeriod {
+@XmlRootElement(name = "GetData2")
+public class GetData2 {
 
-    @XmlElement(name = "Params", required = true)
-    protected ParamsDate params;
+    @XmlElement(name = "Size")
+    protected int size;
     @XmlElement(name = "Token", required = true)
     protected String token;
 
     /**
-     * Gets the value of the params property.
+     * Gets the value of the size property.
      * 
-     * @return
-     *     possible object is
-     *     {@link ParamsDate }
-     *     
      */
-    public ParamsDate getParams() {
-        return params;
+    public int getSize() {
+        return size;
     }
 
     /**
-     * Sets the value of the params property.
+     * Sets the value of the size property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link ParamsDate }
-     *     
      */
-    public void setParams(ParamsDate value) {
-        this.params = value;
+    public void setSize(int value) {
+        this.size = value;
     }
 
     /**

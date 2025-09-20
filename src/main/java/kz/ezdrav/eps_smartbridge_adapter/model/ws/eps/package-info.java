@@ -5,5 +5,5 @@
 // Generated on: 2025.09.14 at 04:24:58 PM GMT+05:00 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.kaysat-ps.org", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package kz.ezdrav.eps_smartbridge_adapter.model.ws.esp;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://erdb.ezdrav.kz/eps", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+package kz.ezdrav.eps_smartbridge_adapter.model.ws.eps;

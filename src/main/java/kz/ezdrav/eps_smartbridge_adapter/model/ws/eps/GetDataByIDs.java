@@ -6,7 +6,7 @@
 //
 
 
-package kz.ezdrav.eps_smartbridge_adapter.model.ws.esp;
+package kz.ezdrav.eps_smartbridge_adapter.model.ws.eps;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="sData" type="{http://www.kaysat-ps.org}DefectsBatch"/&gt;
+ *         &lt;element name="Params" type="{http://www.kaysat-ps.org}ParamsIDs"/&gt;
  *         &lt;element name="Token" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -37,39 +37,39 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "sData",
+    "params",
     "token"
 })
-@XmlRootElement(name = "SetDefects")
-public class SetDefects {
+@XmlRootElement(name = "GetDataByIDs")
+public class GetDataByIDs {
 
-    @XmlElement(required = true)
-    protected DefectsBatch sData;
+    @XmlElement(name = "Params", required = true)
+    protected ParamsIDs params;
     @XmlElement(name = "Token", required = true)
     protected String token;
 
     /**
-     * Gets the value of the sData property.
+     * Gets the value of the params property.
      * 
      * @return
      *     possible object is
-     *     {@link DefectsBatch }
+     *     {@link ParamsIDs }
      *     
      */
-    public DefectsBatch getSData() {
-        return sData;
+    public ParamsIDs getParams() {
+        return params;
     }
 
     /**
-     * Sets the value of the sData property.
+     * Sets the value of the params property.
      * 
      * @param value
      *     allowed object is
-     *     {@link DefectsBatch }
+     *     {@link ParamsIDs }
      *     
      */
-    public void setSData(DefectsBatch value) {
-        this.sData = value;
+    public void setParams(ParamsIDs value) {
+        this.params = value;
     }
 
     /**

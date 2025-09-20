@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://www.kaysat-ps.org"
-           xmlns="http://www.kaysat-ps.org"
-           elementFormDefault="qualified"
-           attributeFormDefault="unqualified">
+           targetNamespace="http://erdb.ezdrav.kz/eps">
 
     <!-- ========== Simple Types ========== -->
     <xs:simpleType name="MKB10Code">
