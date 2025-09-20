@@ -16,7 +16,7 @@ public class JaxbUtil {
         String[] packagesToScan = {
                 "kz.ezdrav.eh.shep.syncchannel.v10.types",
                 "kz.ezdrav.eh.shep.common.v10.types",
-                "kz.ezdrav.eh.erdb.model.ws"
+                "kz.ezdrav.eps_smartbridge_adapter.model.ws"
         };
 
         Jaxb2Marshaller marshallerFactory = new Jaxb2Marshaller();

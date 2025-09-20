@@ -57,7 +57,7 @@ public class EpsEndpointImpl implements EpsEndpoint {
     }
 
     private SyncSendMessageResponse handleEpsRequest(SyncSendMessageRequest request) {
-        
-        return null;
+
+        return ShepUtil.buildSuccessSyncSendMessageResponse("Success");
     }
 }

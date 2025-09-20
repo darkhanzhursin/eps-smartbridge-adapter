@@ -61,6 +61,7 @@ public class SaveShepServiceEventAspect {
         event.setRequest(serializeRequest(request));
         event.setClientIp(getRequestClientIp());
         event.setIsSuccess(true);
+        event.setEvent("eps-event");
         return event;
     }
 
