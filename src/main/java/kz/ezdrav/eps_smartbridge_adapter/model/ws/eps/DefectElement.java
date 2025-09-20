@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -56,7 +57,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "expertId",
     "vidDefect"
 })
-public class DefectElement {
+public class DefectElement extends EpsRequest {
 
     @XmlElement(name = "mis_id")
     @XmlSchemaType(name = "unsignedLong")

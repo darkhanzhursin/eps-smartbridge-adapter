@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -40,13 +41,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "GetReferral", propOrder = {
     "directedMoId",
     "date",
     "token"
 })
 @XmlRootElement(name = "GetReferral")
-public class GetReferral {
+public class GetReferral extends EpsRequest {
 
     @XmlElement(name = "directed_mo_id", required = true)
     @XmlSchemaType(name = "unsignedLong")

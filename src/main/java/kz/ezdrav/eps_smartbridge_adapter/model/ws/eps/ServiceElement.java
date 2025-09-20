@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -68,7 +69,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "doctorLastName",
     "diagList"
 })
-public class ServiceElement {
+public class ServiceElement extends EpsRequest {
 
     @XmlElement(name = "ID", required = true)
     @XmlSchemaType(name = "unsignedLong")

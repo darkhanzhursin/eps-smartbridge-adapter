@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -36,12 +37,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "SetDefects", propOrder = {
     "sData",
     "token"
 })
 @XmlRootElement(name = "SetDefects")
-public class SetDefects {
+public class SetDefects extends EpsRequest {
 
     @XmlElement(required = true)
     protected DefectsBatch sData;

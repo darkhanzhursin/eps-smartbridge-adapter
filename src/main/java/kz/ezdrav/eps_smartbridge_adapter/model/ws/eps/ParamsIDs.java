@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -41,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
     "identifiers",
     "typeRegistr"
 })
-public class ParamsIDs {
+public class ParamsIDs extends EpsRequest {
 
     @XmlElement(name = "Identifiers", required = true)
     protected List<IDRecord> identifiers;

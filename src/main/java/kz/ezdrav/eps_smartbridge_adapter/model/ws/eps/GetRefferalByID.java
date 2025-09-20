@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -38,12 +39,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "GetRefferalByID", propOrder = {
     "id",
     "token"
 })
 @XmlRootElement(name = "GetRefferalByID")
-public class GetRefferalByID {
+public class GetRefferalByID extends EpsRequest {
 
     @XmlElement(name = "ID", required = true)
     @XmlSchemaType(name = "unsignedLong")

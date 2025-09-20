@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -41,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
     "misId",
     "id"
 })
-public class IDRecord {
+public class IDRecord extends EpsRequest {
 
     @XmlElement(name = "mis_id", required = true)
     @XmlSchemaType(name = "unsignedLong")

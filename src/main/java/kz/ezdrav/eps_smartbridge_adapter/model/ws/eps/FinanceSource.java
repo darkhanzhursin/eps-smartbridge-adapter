@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -36,12 +37,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "FinanceSource", propOrder = {
     "sData",
     "token"
 })
 @XmlRootElement(name = "FinanceSource")
-public class FinanceSource {
+public class FinanceSource extends EpsRequest {
 
     @XmlElement(required = true)
     protected FinanceBatch sData;

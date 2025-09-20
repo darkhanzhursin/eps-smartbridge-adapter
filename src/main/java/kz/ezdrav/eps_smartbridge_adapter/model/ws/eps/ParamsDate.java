@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -53,7 +54,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "afterUpdEnd",
     "region"
 })
-public class ParamsDate {
+public class ParamsDate extends EpsRequest {
 
     @XmlElement(name = "DateBegin", required = true)
     @XmlSchemaType(name = "dateTime")

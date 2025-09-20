@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -41,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
     "chekId",
     "chekValue"
 })
-public class ChekList {
+public class ChekList extends EpsRequest {
 
     @XmlElement(name = "scrining_id", required = true)
     protected String scriningId;

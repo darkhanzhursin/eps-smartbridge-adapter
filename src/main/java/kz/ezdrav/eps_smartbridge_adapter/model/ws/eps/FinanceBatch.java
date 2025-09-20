@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -39,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "FinanceBatch", propOrder = {
     "services"
 })
-public class FinanceBatch {
+public class FinanceBatch extends EpsRequest {
 
     @XmlElement(name = "Services")
     protected List<FinanceElement> services;

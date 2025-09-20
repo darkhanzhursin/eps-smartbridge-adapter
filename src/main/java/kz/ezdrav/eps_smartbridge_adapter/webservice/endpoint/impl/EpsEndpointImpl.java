@@ -8,6 +8,7 @@ import kz.ezdrav.eh.shep.syncchannel.v10.types.response.SyncSendMessageResponse;
 import kz.ezdrav.eh.shep.util.ShepUtil;
 import kz.ezdrav.eps_smartbridge_adapter.annotation.SaveShepServiceEvent;
 import kz.ezdrav.eps_smartbridge_adapter.exception.GeneralException;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 import kz.ezdrav.eps_smartbridge_adapter.model.ws.common.GeneralInfoResponse;
 import kz.ezdrav.eps_smartbridge_adapter.service.SmartBridgeLoggingService;
 import kz.ezdrav.eps_smartbridge_adapter.webservice.endpoint.EpsEndpoint;
@@ -38,9 +39,9 @@ public class EpsEndpointImpl implements EpsEndpoint {
         Object data = request.getRequestData().getData();
 
         try {
-//            if (data instanceof CreateEsmo) {
-//                return handleCreateEsmo(data);
-//            }
+            if (data instanceof EpsRequest) {
+                return handleEpsRequest(request);
+            }
         }
         catch (GeneralException e) {
             return ShepUtil.buildErrorSyncSendMessageResponse(GeneralInfoResponse.buildError(e));
@@ -55,9 +56,8 @@ public class EpsEndpointImpl implements EpsEndpoint {
         );
     }
 
-    private SyncSendMessageResponse handleCreateEsmo(Object data) {
-//        CreateEsmo createEsmo = (CreateEsmo) data;
-//        return ShepUtil.buildSuccessSyncSendMessageResponse(esmoService.create(createEsmo));
+    private SyncSendMessageResponse handleEpsRequest(SyncSendMessageRequest request) {
+        
         return null;
     }
 }

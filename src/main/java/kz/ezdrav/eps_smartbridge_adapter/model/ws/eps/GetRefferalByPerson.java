@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 
 
 /**
@@ -40,14 +41,14 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "GetRefferalByPerson", propOrder = {
     "iin",
     "token",
     "rpnID",
     "consentToken"
 })
 @XmlRootElement(name = "GetRefferalByPerson")
-public class GetRefferalByPerson {
+public class GetRefferalByPerson extends EpsRequest {
 
     @XmlElement(name = "IIN", required = true)
     protected String iin;
