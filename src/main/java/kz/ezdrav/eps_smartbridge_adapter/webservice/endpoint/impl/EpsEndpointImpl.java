@@ -21,7 +21,6 @@ import kz.ezdrav.eh.shep.syncchannel.v10.types.request.SyncSendMessageRequest;
 import kz.ezdrav.eh.shep.syncchannel.v10.types.response.SyncSendMessageResponse;
 import kz.ezdrav.eh.shep.util.ShepUtil;
 import kz.ezdrav.eps_smartbridge_adapter.annotation.SaveShepServiceEvent;
-import kz.ezdrav.eps_smartbridge_adapter.exception.EpsServiceException;
 import kz.ezdrav.eps_smartbridge_adapter.exception.GeneralException;
 import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 import kz.ezdrav.eps_smartbridge_adapter.model.ws.common.GeneralInfoResponse;
@@ -43,7 +42,6 @@ public class EpsEndpointImpl implements EpsEndpoint {
 
     private static final String EPS_SERVICE_URL = "https://app01.ezdrav.kz/appwais/ws/ws1.1cws";
     private static final String KAYSAT_NAMESPACE = "http://www.kaysat-ps.org";
-    private static final String SOAP_ACTION = "";
 
     @Override
     @SaveShepServiceEvent
@@ -213,7 +211,7 @@ public class EpsEndpointImpl implements EpsEndpoint {
         try {
             // Send SOAP message
             URL endpoint = new URL(EPS_SERVICE_URL);
-            SOAPMessage response = soapConnection.call(soapMessage, endpoint);
+            SOAPMessage response = soapConnection.call(soapMessage, EPS_SERVICE_URL);
 
             // Log the response
             logSoapMessage("Incoming SOAP Response", response);
