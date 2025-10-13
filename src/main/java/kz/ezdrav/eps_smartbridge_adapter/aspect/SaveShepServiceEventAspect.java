@@ -50,7 +50,7 @@ public class SaveShepServiceEventAspect {
             throw ex;
         } finally {
             shepServiceEventParamsHolder.remove();
-            shepServiceEventService.save(event);
+//            shepServiceEventService.save(event);
         }
     }
 

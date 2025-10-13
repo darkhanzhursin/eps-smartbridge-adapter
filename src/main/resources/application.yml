@@ -10,6 +10,8 @@ server:
 # Настройки Spring Boot
 # -----------------------
 spring:
+  profiles:
+    active: dev
   application:
     name: eps-smartbridge-adapter                   # Имя приложения
   springdoc:
@@ -39,7 +41,7 @@ spring:
     database-platform: org.hibernate.dialect.SQLServer2012Dialect
     open-in-view: false               # Отключение Open Session in View
     hibernate:
-      ddl-auto: none                  # Без автоматических изменений схемы БД
+      ddl-auto: create-drop                  # Без автоматических изменений схемы БД
 
 # -----------------------
 # Настройки Feign client
