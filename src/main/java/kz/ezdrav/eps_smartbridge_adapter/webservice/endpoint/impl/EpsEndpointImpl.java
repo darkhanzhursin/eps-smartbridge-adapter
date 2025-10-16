@@ -55,7 +55,6 @@ public class EpsEndpointImpl implements EpsEndpoint {
     private static final String EPS_SERVICE_URL = "https://app01.ezdrav.kz/appwais/ws/ws1.1cws";
     private static final String KAYSAT_NAMESPACE = "http://www.kaysat-ps.org";
 
-    // SSL configuration properties
     @Value("${eps.ssl.trust-all:false}")
     private boolean trustAllCertificates;
 
@@ -82,7 +81,6 @@ public class EpsEndpointImpl implements EpsEndpoint {
                 configureCustomTrustStore();
             } else {
                 log.info("Using default JVM SSL configuration");
-                // Optionally configure to use system properties
                 configureSystemTrustStore();
             }
 
@@ -97,31 +95,23 @@ public class EpsEndpointImpl implements EpsEndpoint {
     }
 
     private void configureSystemTrustStore() {
-        // Use system properties if set
         String trustStorePath = System.getProperty("javax.net.ssl.trustStore");
-        String trustStorePass = System.getProperty("javax.net.ssl.trustStorePassword");
-
         if (trustStorePath != null) {
             log.info("Using system truststore: {}", trustStorePath);
-            // System properties will be used automatically by HttpsURLConnection
         }
     }
 
     private void configureCustomTrustStore() throws Exception {
-        // Load custom truststore
         KeyStore keyStore = KeyStore.getInstance(trustStoreType);
         keyStore.load(trustStore.getInputStream(), trustStorePassword.toCharArray());
 
-        // Create TrustManagerFactory
         TrustManagerFactory tmf = TrustManagerFactory.getInstance(
             TrustManagerFactory.getDefaultAlgorithm());
         tmf.init(keyStore);
 
-        // Create SSLContext
         SSLContext sslContext = SSLContext.getInstance("TLS");
         sslContext.init(null, tmf.getTrustManagers(), new SecureRandom());
 
-        // Set as default
         HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
 
         log.info("SSL configured with custom truststore containing {} certificates",
@@ -129,7 +119,6 @@ public class EpsEndpointImpl implements EpsEndpoint {
     }
 
     private void configureTrustAllCertificates() throws Exception {
-        // Create a trust manager that accepts all certificates
         TrustManager[] trustAllCerts = new TrustManager[] {
             new X509TrustManager() {
                 public X509Certificate[] getAcceptedIssuers() {
@@ -137,11 +126,9 @@ public class EpsEndpointImpl implements EpsEndpoint {
                 }
 
                 public void checkClientTrusted(X509Certificate[] certs, String authType) {
-                    // Trust all clients
                 }
 
                 public void checkServerTrusted(X509Certificate[] certs, String authType) {
-                    // Trust all servers
                     if (log.isDebugEnabled() && certs != null && certs.length > 0) {
                         log.debug("Trusting server certificate: CN={}",
                             certs[0].getSubjectDN().getName());
@@ -150,18 +137,15 @@ public class EpsEndpointImpl implements EpsEndpoint {
             }
         };
 
-        // Create SSL context with trust-all manager
         SSLContext sslContext = SSLContext.getInstance("TLS");
         sslContext.init(null, trustAllCerts, new SecureRandom());
-
-        // Set as default
         HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
     }
 
     @Override
     @SaveShepServiceEvent
     public SyncSendMessageResponse sendMessage(SyncSendMessageRequest request) throws SendMessageSendMessageFaultMsg {
-        log.info("Received SOAP request: {}", request);
+        log.info("Received SOAP request");
         return handleRequest(request);
     }
 
@@ -173,11 +157,9 @@ public class EpsEndpointImpl implements EpsEndpoint {
             if (data instanceof EpsRequest) {
                 return handleEpsRequest(data);
             }
-        }
-        catch (GeneralException e) {
+        } catch (GeneralException e) {
             return ShepUtil.buildErrorSyncSendMessageResponse(GeneralInfoResponse.buildError(e));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error("Error occurred while processing request: ", e);
             return ShepUtil.buildErrorSyncSendMessageResponse(GeneralInfoResponse.buildError(e));
         }
@@ -191,10 +173,7 @@ public class EpsEndpointImpl implements EpsEndpoint {
         log.debug("Processing EPS request of type: {}", data.getClass().getSimpleName());
 
         try {
-            // Create SOAP message based on request type
             SOAPMessage soapMessage = createSoapMessage(data);
-
-            // Send SOAP request to EPS service
             String response = sendSoapRequest(soapMessage);
 
             log.debug("Received response from EPS service: {}", response);
@@ -208,18 +187,16 @@ public class EpsEndpointImpl implements EpsEndpoint {
     }
 
     private SOAPMessage createSoapMessage(Object data) throws Exception {
-        MessageFactory messageFactory = MessageFactory.newInstance(SOAPConstants.SOAP_1_2_PROTOCOL);
+        MessageFactory messageFactory = MessageFactory.newInstance(SOAPConstants.SOAP_1_1_PROTOCOL);
         SOAPMessage soapMessage = messageFactory.createMessage();
 
         SOAPPart soapPart = soapMessage.getSOAPPart();
         SOAPEnvelope envelope = soapPart.getEnvelope();
 
-        // Set namespace
         envelope.addNamespaceDeclaration("kay", KAYSAT_NAMESPACE);
 
         SOAPBody soapBody = envelope.getBody();
 
-        // Create request element based on data type
         if (data instanceof GetReferral) {
             createGetReferralElement(soapBody, (GetReferral) data);
         } else if (data instanceof DefectElement) {
@@ -239,24 +216,27 @@ public class EpsEndpointImpl implements EpsEndpoint {
     private void createGetRefferalByPeriodElement(SOAPBody soapBody, GetRefferalByPeriod getRefferalByPeriod) throws SOAPException {
         SOAPElement getReferralByPeriodElement = soapBody.addChildElement("GetReferralByPeriod", "kay");
 
-        if (getRefferalByPeriod.getParams().getDateBegin() != null) {
-            SOAPElement dateBegin = getReferralByPeriodElement.addChildElement("DateBegin", "kay");
-            dateBegin.addTextNode(getRefferalByPeriod.getParams().getDateBegin().toString());
-        }
+        if (getRefferalByPeriod.getParams() != null) {
+            SOAPElement paramsElement = getReferralByPeriodElement.addChildElement("Params", "kay");
+            if (getRefferalByPeriod.getParams().getDateBegin() != null) {
+                SOAPElement dateBegin = paramsElement.addChildElement("DateBegin", "kay");
+                dateBegin.addTextNode(getRefferalByPeriod.getParams().getDateBegin().toString());
+            }
 
-        if (getRefferalByPeriod.getParams().getDateEnd() != null) {
-            SOAPElement dateEnd = getReferralByPeriodElement.addChildElement("DateEnd", "kay");
-            dateEnd.addTextNode(getRefferalByPeriod.getParams().getDateEnd().toString());
-        }
+            if (getRefferalByPeriod.getParams().getDateEnd() != null) {
+                SOAPElement dateEnd = paramsElement.addChildElement("DateEnd", "kay");
+                dateEnd.addTextNode(getRefferalByPeriod.getParams().getDateEnd().toString());
+            }
 
-        if (getRefferalByPeriod.getParams().getPageNo() > 0) {
-            SOAPElement pageNo = getReferralByPeriodElement.addChildElement("PageNo", "kay");
-            pageNo.addTextNode(String.valueOf(getRefferalByPeriod.getParams().getPageNo()));
-        }
+            if (getRefferalByPeriod.getParams().getPageNo() > 0) {
+                SOAPElement pageNo = paramsElement.addChildElement("PageNo", "kay");
+                pageNo.addTextNode(String.valueOf(getRefferalByPeriod.getParams().getPageNo()));
+            }
 
-        if (getRefferalByPeriod.getParams().getPageSize() > 0) {
-            SOAPElement pageSize = getReferralByPeriodElement.addChildElement("PageSize", "kay");
-            pageSize.addTextNode(String.valueOf(getRefferalByPeriod.getParams().getPageSize()));
+            if (getRefferalByPeriod.getParams().getPageSize() > 0) {
+                SOAPElement pageSize = paramsElement.addChildElement("PageSize", "kay");
+                pageSize.addTextNode(String.valueOf(getRefferalByPeriod.getParams().getPageSize()));
+            }
         }
 
         if (getRefferalByPeriod.getToken() != null) {
@@ -347,22 +327,17 @@ public class EpsEndpointImpl implements EpsEndpoint {
     private String sendSoapRequest(SOAPMessage soapMessage) throws Exception {
         log.debug("Sending SOAP request to: {}", EPS_SERVICE_URL);
 
-        // Log the outgoing SOAP message
         logSoapMessage("Outgoing SOAP Request", soapMessage);
 
-        // Create SOAP connection
         SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
         SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
         try {
-            // Send SOAP message
             URL endpoint = new URL(EPS_SERVICE_URL);
             SOAPMessage response = soapConnection.call(soapMessage, EPS_SERVICE_URL);
 
-            // Log the response
             logSoapMessage("Incoming SOAP Response", response);
 
-            // Convert response to string
             return soapMessageToString(response);
 
         } finally {
@@ -387,5 +362,4 @@ public class EpsEndpointImpl implements EpsEndpoint {
             .transform(new DOMSource(message.getSOAPPart()), new StreamResult(writer));
         return writer.toString();
     }
-
 }
