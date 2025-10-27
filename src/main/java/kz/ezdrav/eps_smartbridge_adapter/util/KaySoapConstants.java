@@ -34,6 +34,8 @@ public final class KaySoapConstants {
     public static final String PAGE_NO = "PageNo";
     public static final String PAGE_SIZE = "PageSize";
     public static final String SIZE = "size";
+    public static final String IIN = "IIN";
+    public static final String CONSENT_TOKEN = "ConsentToken";
 
     // Identifiers
     public static final String IDENTIFIERS = "Identifiers";
@@ -51,6 +53,7 @@ public final class KaySoapConstants {
     public static final String DIRECTION_REASON = "direction_reason";
     public static final String PATIENT_STATUS = "PatientStatus";
     public static final String RPN_ID_MOTHER = "RpnIDMother";
+    public static final String RPN_ID = "RpnID";
     public static final String GROUP_ID = "group_id";
     public static final String PLACE = "Place";
     public static final String PARENT_ID = "Parent_id";

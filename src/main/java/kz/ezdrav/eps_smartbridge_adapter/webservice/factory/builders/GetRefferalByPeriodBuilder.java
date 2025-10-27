@@ -22,37 +22,30 @@ public class GetRefferalByPeriodBuilder implements SoapMessageBuilder {
             buildParams(element, request.getParams());
         }
 
-        addOptionalElement(element, "Token", request.getToken());
+        Utils.addToken(element, request.getToken());
     }
 
     private void buildParams(SOAPElement parent, Object params) throws SOAPException {
-        SOAPElement paramsElement = parent.addChildElement("Params", "kay");
+        SOAPElement paramsElement = parent.addChildElement("Params", KaySoapConstants.KAY);
         // Reflection or direct casting based on your params structure
         ParamsDate paramsDate = (ParamsDate) params;
         if (paramsDate.getDateBegin() != null) {
-            SOAPElement dateBegin = paramsElement.addChildElement(KaySoapConstants.DATE_BEGIN, "kay");
+            SOAPElement dateBegin = paramsElement.addChildElement(KaySoapConstants.DATE_BEGIN, KaySoapConstants.KAY);
             dateBegin.addTextNode(paramsDate.getDateBegin().toString());
         }
         if (paramsDate.getDateEnd() != null) {
-            SOAPElement dateEnd = paramsElement.addChildElement("DateEnd", "kay");
+            SOAPElement dateEnd = paramsElement.addChildElement("DateEnd", KaySoapConstants.KAY);
             dateEnd.addTextNode(paramsDate.getDateEnd().toString());
         }
 
         if (paramsDate.getPageNo() > 0) {
-            SOAPElement pageNo = paramsElement.addChildElement("PageNo", "kay");
+            SOAPElement pageNo = paramsElement.addChildElement("PageNo", KaySoapConstants.KAY);
             pageNo.addTextNode(String.valueOf(paramsDate.getPageNo()));
         }
 
         if (paramsDate.getPageSize() > 0) {
-            SOAPElement pageSize = paramsElement.addChildElement("PageSize", "kay");
+            SOAPElement pageSize = paramsElement.addChildElement("PageSize", KaySoapConstants.KAY);
             pageSize.addTextNode(String.valueOf(paramsDate.getPageSize()));
-        }
-    }
-
-    private void addOptionalElement(SOAPElement parent, String name, Object value) throws SOAPException {
-        if (value != null) {
-            SOAPElement child = parent.addChildElement(name, "kay");
-            child.addTextNode(value.toString());
         }
     }
 }
