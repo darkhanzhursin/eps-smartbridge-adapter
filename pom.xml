@@ -233,31 +233,31 @@
                 </configuration>
             </plugin>
             <!-- JAXB генерация классов из XSD -->
-<!--            <plugin>-->
-<!--                <groupId>org.codehaus.mojo</groupId>-->
-<!--                <artifactId>jaxb2-maven-plugin</artifactId>-->
-<!--                <version>${jaxb2-maven-plugin.version}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>generate-sources</id>-->
-<!--                        <phase>generate-sources</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>xjc</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <sources>-->
-<!--                                <source>src/main/resources/xsd/eps.xsd</source>-->
-<!--                            </sources>-->
-<!--                            <xjbSources>-->
-<!--                                <xjbSource>src/main/resources/xjb/bindings.xjb</xjbSource>-->
-<!--                            </xjbSources>-->
-<!--                            <packageName>kz.ezdrav.eps_smartbridge_adapter.model.ws.eps</packageName>-->
-<!--                            <clearOutputDir>true</clearOutputDir>-->
-<!--                            <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>${jaxb2-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/main/resources/xsd/eps.xsd</source>
+                            </sources>
+                            <xjbSources>
+                                <xjbSource>src/main/resources/xjb/bindings.xjb</xjbSource>
+                            </xjbSources>
+                            <packageName>kz.ezdrav.eps_smartbridge_adapter.model.ws.eps</packageName>
+                            <clearOutputDir>true</clearOutputDir>
+                            <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- Указание Maven использовать сгенерированные классы -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
