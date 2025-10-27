@@ -33,13 +33,12 @@ import kz.ezdrav.eps_smartbridge_adapter.annotation.SaveShepServiceEvent;
 import kz.ezdrav.eps_smartbridge_adapter.exception.GeneralException;
 import kz.ezdrav.eps_smartbridge_adapter.model.ws.EpsRequest;
 import kz.ezdrav.eps_smartbridge_adapter.model.ws.common.GeneralInfoResponse;
-import kz.ezdrav.eps_smartbridge_adapter.model.ws.eps.ChekList;
-import kz.ezdrav.eps_smartbridge_adapter.model.ws.eps.DefectElement;
-import kz.ezdrav.eps_smartbridge_adapter.model.ws.eps.GetReferral;
-import kz.ezdrav.eps_smartbridge_adapter.model.ws.eps.GetRefferalByPeriod;
+import kz.ezdrav.eps_smartbridge_adapter.model.ws.eps.*;
 import kz.ezdrav.eps_smartbridge_adapter.webservice.endpoint.EpsEndpoint;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -54,6 +53,7 @@ public class EpsEndpointImpl implements EpsEndpoint {
 
     private static final String EPS_SERVICE_URL = "https://app01.ezdrav.kz/appwais/ws/ws1.1cws";
     private static final String KAYSAT_NAMESPACE = "http://www.kaysat-ps.org";
+    private static final Logger log = LoggerFactory.getLogger(EpsEndpointImpl.class);
 
     @Value("${eps.ssl.trust-all:false}")
     private boolean trustAllCertificates;
@@ -187,7 +187,7 @@ public class EpsEndpointImpl implements EpsEndpoint {
     }
 
     private SOAPMessage createSoapMessage(Object data) throws Exception {
-        MessageFactory messageFactory = MessageFactory.newInstance(SOAPConstants.SOAP_1_1_PROTOCOL);
+        MessageFactory messageFactory = MessageFactory.newInstance(SOAPConstants.SOAP_1_2_PROTOCOL);
         SOAPMessage soapMessage = messageFactory.createMessage();
 
         SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -205,6 +205,20 @@ public class EpsEndpointImpl implements EpsEndpoint {
             createChekListElement(soapBody, (ChekList) data);
         } else if (data instanceof GetRefferalByPeriod) {
             createGetRefferalByPeriodElement(soapBody, (GetRefferalByPeriod) data);
+        } else if (data instanceof SetData) {
+            System.out.println("it is SetData");
+        } else if (data instanceof SetReferral) {
+            System.out.println("it is SetReferral");
+        } else if (data instanceof GetRefferalByPerson) {
+            System.out.println("it is GetRefferalByPerson");
+        } else if (data instanceof GetRefferalByID) {
+            System.out.println("it is GetRefferalByID");
+        } else if (data instanceof FinanceSource) {
+            System.out.println("it is FinanceSource");
+        } else if (data instanceof GetIdByDate) {
+            System.out.println("it is GetIdByDate");
+        } else if (data instanceof GetDataByIDs) {
+            System.out.println("it is GetDataByIDs");
         } else {
             throw new Exception("Unsupported request type: " + data.getClass().getSimpleName());
         }
@@ -214,10 +228,12 @@ public class EpsEndpointImpl implements EpsEndpoint {
     }
 
     private void createGetRefferalByPeriodElement(SOAPBody soapBody, GetRefferalByPeriod getRefferalByPeriod) throws SOAPException {
-        SOAPElement getReferralByPeriodElement = soapBody.addChildElement("GetReferralByPeriod", "kay");
+        SOAPElement getReferralByPeriodElement = soapBody.addChildElement("GetRefferalByPeriod", "kay");
 
         if (getRefferalByPeriod.getParams() != null) {
+            // Create Params wrapper element
             SOAPElement paramsElement = getReferralByPeriodElement.addChildElement("Params", "kay");
+
             if (getRefferalByPeriod.getParams().getDateBegin() != null) {
                 SOAPElement dateBegin = paramsElement.addChildElement("DateBegin", "kay");
                 dateBegin.addTextNode(getRefferalByPeriod.getParams().getDateBegin().toString());
