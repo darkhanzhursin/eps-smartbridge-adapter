@@ -26,7 +26,7 @@ public class GetRefferalByPeriodBuilder implements SoapMessageBuilder {
     }
 
     private void buildParams(SOAPElement parent, Object params) throws SOAPException {
-        SOAPElement paramsElement = parent.addChildElement("Params", KaySoapConstants.KAY);
+        SOAPElement paramsElement = parent.addChildElement(KaySoapConstants.PARAMS, KaySoapConstants.KAY);
         // Reflection or direct casting based on your params structure
         ParamsDate paramsDate = (ParamsDate) params;
         if (paramsDate.getDateBegin() != null) {
@@ -34,17 +34,17 @@ public class GetRefferalByPeriodBuilder implements SoapMessageBuilder {
             dateBegin.addTextNode(paramsDate.getDateBegin().toString());
         }
         if (paramsDate.getDateEnd() != null) {
-            SOAPElement dateEnd = paramsElement.addChildElement("DateEnd", KaySoapConstants.KAY);
+            SOAPElement dateEnd = paramsElement.addChildElement(KaySoapConstants.DATE_END, KaySoapConstants.KAY);
             dateEnd.addTextNode(paramsDate.getDateEnd().toString());
         }
 
         if (paramsDate.getPageNo() > 0) {
-            SOAPElement pageNo = paramsElement.addChildElement("PageNo", KaySoapConstants.KAY);
+            SOAPElement pageNo = paramsElement.addChildElement(KaySoapConstants.PAGE_NO, KaySoapConstants.KAY);
             pageNo.addTextNode(String.valueOf(paramsDate.getPageNo()));
         }
 
         if (paramsDate.getPageSize() > 0) {
-            SOAPElement pageSize = paramsElement.addChildElement("PageSize", KaySoapConstants.KAY);
+            SOAPElement pageSize = paramsElement.addChildElement(KaySoapConstants.PAGE_SIZE, KaySoapConstants.KAY);
             pageSize.addTextNode(String.valueOf(paramsDate.getPageSize()));
         }
     }
