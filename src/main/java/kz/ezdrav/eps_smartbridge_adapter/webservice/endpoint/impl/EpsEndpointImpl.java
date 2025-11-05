@@ -47,7 +47,6 @@ public class EpsEndpointImpl implements EpsEndpoint {
     private final EpsSoapClient soapClient;
 
     private static final String EPS_SERVICE_URL = "https://app01.ezdrav.kz/appwais/ws/ws1.1cws";
-    private static final String KAYSAT_NAMESPACE = "http://www.kaysat-ps.org";
     private static final Logger log = LoggerFactory.getLogger(EpsEndpointImpl.class);
 
     @Value("${eps.ssl.trust-all:false}")

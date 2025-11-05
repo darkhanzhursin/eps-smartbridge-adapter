@@ -44,13 +44,13 @@ public class SaveShepServiceEventAspect {
             return result;
         } catch (Throwable ex) {
             event.setIsSuccess(false);
-            event.setResponse(buildErrorResponse(ex));
+            event.setErrorResponse(buildErrorResponse(ex));
 
             setThreadLocalFieldsSafe(event);
             throw ex;
         } finally {
             shepServiceEventParamsHolder.remove();
-//            shepServiceEventService.save(event);
+            shepServiceEventService.save(event);
         }
     }
 
@@ -58,7 +58,7 @@ public class SaveShepServiceEventAspect {
         ShepServiceEvent event = new ShepServiceEvent();
         event.setServiceId(request.getRequestInfo().getServiceId());
         event.setSenderId(request.getRequestInfo().getSender().getSenderId());
-        event.setRequest(serializeRequest(request));
+//        event.setRequest(serializeRequest(request));
         event.setClientIp(getRequestClientIp());
         event.setIsSuccess(true);
         event.setEvent("eps-event");
@@ -68,7 +68,7 @@ public class SaveShepServiceEventAspect {
     private void setResponseFields(ShepServiceEvent event, SyncSendMessageResponse response) {
         setResponseSuccess(event, response);
         String serialized = serializeResponse(response);
-        event.setResponse(StringUtils.hasText(serialized) ? serialized : DEFAULT_SUCCESS_RESPONSE);
+        //event.setResponse(StringUtils.hasText(serialized) ? serialized : DEFAULT_SUCCESS_RESPONSE);
     }
 
     private void setThreadLocalFields(ShepServiceEvent event) {

@@ -15,6 +15,8 @@ import java.util.Optional;
 @Component
 public class GetDataByPeriodBuilder implements SoapMessageBuilder {
 
+    private final String template = " is mandatory field";
+
     @Override
     public void buildBody(SOAPBody soapBody, Object data) throws SOAPException {
         GetDataByPeriod request = (GetDataByPeriod) data;
